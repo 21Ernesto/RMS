@@ -35,6 +35,18 @@ CREATE TABLE IF NOT EXISTS `car_galleries` (
 
 DELETE FROM `car_galleries`;
 
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `menus`;
+
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -50,6 +62,64 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `categories`;
+
+
+CREATE TABLE IF NOT EXISTS `teams` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `teams`;
+
+CREATE TABLE IF NOT EXISTS `trips` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_page` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `day` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `outstanding` tinyint(1) DEFAULT '0',
+  `first_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `second_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_real` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type_trips` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `trips_category_id_foreign` (`category_id`),
+  CONSTRAINT `trips_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `trips`;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `current_team_id` bigint unsigned DEFAULT NULL,
+  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `users`;
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
+	(1, 'Test User', 'test@test.com', '2024-06-08 04:31:12', '$2y$12$Pvea6/RxCpfvkfyCfXIVGOZ9dNr50IZd7EUXbs/f0QefgIHFPUSnK', NULL, NULL, NULL, 'HAGjpc8M1q', NULL, NULL, '2024-06-08 04:31:12', '2024-06-08 04:31:12');
 
 CREATE TABLE IF NOT EXISTS `excludeds` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -198,18 +268,6 @@ CREATE TABLE IF NOT EXISTS `mails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `mails`;
-
-CREATE TABLE IF NOT EXISTS `menus` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-DELETE FROM `menus`;
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -512,62 +570,6 @@ CREATE TABLE IF NOT EXISTS `suggestions` (
 
 DELETE FROM `suggestions`;
 
-CREATE TABLE IF NOT EXISTS `teams` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-DELETE FROM `teams`;
-
-CREATE TABLE IF NOT EXISTS `trips` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_page` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `day` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `outstanding` tinyint(1) DEFAULT '0',
-  `first_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `second_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price_real` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type_trips` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `trips_category_id_foreign` (`category_id`),
-  CONSTRAINT `trips_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-DELETE FROM `trips`;
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_team_id` bigint unsigned DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-DELETE FROM `users`;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-	(1, 'Test User', 'test@test.com', '2024-06-08 04:31:12', '$2y$12$Pvea6/RxCpfvkfyCfXIVGOZ9dNr50IZd7EUXbs/f0QefgIHFPUSnK', NULL, NULL, NULL, 'HAGjpc8M1q', NULL, NULL, '2024-06-08 04:31:12', '2024-06-08 04:31:12');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
