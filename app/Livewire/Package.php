@@ -22,7 +22,7 @@ class Package extends Component
     public $front_page;
     public $banner;
     public $day;
-    public $outstanding = 0;
+    public $outstanding = false;
     public $first_email;
     public $second_email;
     public $type_trips = 'packages';
@@ -78,7 +78,8 @@ class Package extends Component
         }
         
         if ($this->editId) {
-            $this->update($validatedData);
+            $package = Trip::find($this->editId);
+            $package->update($validatedData);
         } else {
             $this->create($validatedData);
         }
@@ -91,12 +92,6 @@ class Package extends Component
         Trip::create($data);
     }
 
-    private function update($data)
-    {
-        $package = Trip::findOrFail($this->editId);
-        $package->update($data);
-    }
-
     public function edit($id)
     {
         $this->editId = $id;
@@ -104,10 +99,10 @@ class Package extends Component
         $package = Trip::findOrFail($id);
         $this->name = $package->name;
         $this->slug = $package->slug;
-        $this->front_page = $package->front_page;
-        $this->banner = $package->banner;
+        $this->front_page = null;
+        $this->banner = null;
         $this->day = $package->day;
-        $this->outstanding = $package->outstanding;
+        $this->outstanding = (bool) $package->outstanding;
         $this->first_email = $package->first_email;
         $this->second_email = $package->second_email;
         $this->category_id = $package->category_id;
@@ -151,7 +146,7 @@ class Package extends Component
         $this->front_page = '';
         $this->banner = '';
         $this->day = '';
-        $this->outstanding = null;
+        $this->outstanding = false;
         $this->first_email = '';
         $this->second_email = '';
         $this->category_id = '';

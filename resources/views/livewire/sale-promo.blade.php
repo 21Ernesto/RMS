@@ -1,7 +1,8 @@
 <div>
 
     <div class="overflow-x-auto rounded-lg">
-        <div class="mb-3 flex items-center gap-4">
+        <h1 class="font-bold text-2xl">Promociones</h1>
+        <div class="mb-3 mt-5 flex items-center gap-4">
             <div>
                 <label for="">Código:</label>
                 <input wire:model.live="search"
@@ -31,25 +32,7 @@
                     <p><span class="font-bold">Ganancias:</span> ${{ $total }}</p>
                 </div>
             </div>
-        </div>
-
-        <div class="mb-3 ml-3 flex gap-6">
-            <div>
-                <input type="radio" id="todos" name="type_trips" value="" wire:model.live="type_trips">
-                <label for="todos">Todos</label>
-            </div>
-        
-            <div>
-                <input type="radio" id="promotions" name="type_trips" value="promotions" wire:model.live="type_trips">
-                <label for="promotions">Promociones</label>
-            </div>
-        
-            <div>
-                <input type="radio" id="combo_amigo" name="type_trips" value="friendscombos" wire:model.live="type_trips">
-                <label for="combo_amigo">Combo Amigo</label>
-            </div>
-        </div>
-        
+        </div>        
 
 
         <div class="shadow overflow-hidden border-b border-gray-200 bg-white sm:rounded-lg">

@@ -21,7 +21,7 @@ class FriendsCombo extends Component
     public $front_page;
     public $banner;
     public $day;
-    public $outstanding = 0;
+    public $outstanding = false;
     public $first_email;
     public $second_email;
     public $price;
@@ -108,10 +108,10 @@ class FriendsCombo extends Component
         $friendsCombo = Trip::findOrFail($id);
         $this->name = $friendsCombo->name;
         $this->slug = $friendsCombo->slug;
-        $this->front_page = $friendsCombo->front_page;
-        $this->banner = $friendsCombo->banner;
+        $this->front_page = null;
+        $this->banner = null;
         $this->day = $friendsCombo->day;
-        $this->outstanding = $friendsCombo->outstanding;
+        $this->outstanding = (bool) $friendsCombo->outstanding;
         $this->first_email = $friendsCombo->first_email;
         $this->second_email = $friendsCombo->second_email;
         $this->price = $friendsCombo->price;
@@ -157,7 +157,7 @@ class FriendsCombo extends Component
         $this->front_page = '';
         $this->banner = '';
         $this->day = '';
-        $this->outstanding = null;
+        $this->outstanding = false;
         $this->first_email = '';
         $this->second_email = '';
         $this->price = '';

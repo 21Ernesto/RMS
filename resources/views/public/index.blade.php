@@ -74,11 +74,10 @@
             </div>
         </div>
 
-        {{-- <div class="location-area style-2">
+        <div class="location-area style-2">
             <div class="container">
                 <div class="section-title justify-content-start text-start">
                     <div class="sec-content">
-                        <span class="short-title">Paquetes</span>
                         <h2 class="title">Destinos populares</h2>
                         <img class="bottom-shape" src="{{ asset('assets/img/bottom-bar.png') }}" alt="Bottom Shape">
                     </div>
@@ -87,15 +86,15 @@
                     <div class="row">
                         @forelse ($outstandings as $outstanding)
                             <div class="mb-4 col-md-4 masonry-portfolio-item wow fadeInUp" data-wow-delay="0s">
-                                <div class="location-card style-1">
-                                    <div class="image-wrapper">
-                                        <a class="image-inner">
-                                            <img src="{{ asset($outstanding->image) }}" alt="{{ $outstanding->name }}">
+                                <div class="location-card style-1"style="height: 400px; width: auto; overflow: hidden;">
+                                    <div class="image-wrapper" style="height: 400px; width: auto;">
+                                        <a href="{{ route('trip.show', ['slug' => $outstanding->slug]) }}" class="image-inner">
+                                            <img src="{{ asset($outstanding->front_page) }}" alt="{{ $outstanding->name }}" style="height: 400px; width: auto; object-fit: fill;">
                                         </a>
                                     </div>
-                                    <div class="content-wrapper">
+                                    <div class="content-wrapper" style="height: 100px; overflow: hidden;">
                                         <div class="content-inner">
-                                            <h3 class="content-title"><a>{{ $outstanding->name }}</a>
+                                            <h3 class="content-title"><a href="{{ route('trip.show', ['slug' => $outstanding->slug]) }}">{{ $outstanding->name }}</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -107,7 +106,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <div class="why-choose-us-area style-3">
             <div class="container">

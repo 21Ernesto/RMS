@@ -54,16 +54,9 @@ class SaleDelivery extends Component
 
         $total = 0;
         $total_real = 0;
-
-        // $total += $saledelivery->quantity * $saledelivery->price; //Ganancias
-        // $total_real += $saledelivery->quantity * $saledelivery->price_real; //Diferencial
         foreach ($saledeliveries as $saledelivery) {
-
-            $trip = $saledelivery->trip;
-            $packageDeliveries = $trip->packageDeliveries;
-            // $simple = $saledelivery->quantity_simple * $packageDeliveries->client_simple;
-
-            // $total = $simple;
+            $total += $saledelivery->total;
+            $total_real += $saledelivery->total_real;
         }
 
 

@@ -21,7 +21,7 @@ class Tour extends Component
     public $front_page;
     public $banner;
     public $day;
-    public $outstanding = 0;
+    public $outstanding = false;
     public $first_email;
     public $second_email;
     public $price;
@@ -108,7 +108,7 @@ class Tour extends Component
         $this->front_page = null;
         $this->banner = null;
         $this->day = $tour->day;
-        $this->outstanding = $tour->outstanding;
+        $this->outstanding = (bool) $tour->outstanding;
         $this->first_email = $tour->first_email;
         $this->second_email = $tour->second_email;
         $this->price = $tour->price;
@@ -155,12 +155,13 @@ class Tour extends Component
         $this->front_page = '';
         $this->banner = '';
         $this->day = '';
-        $this->outstanding = null;
+        $this->outstanding = false;
         $this->first_email = '';
         $this->second_email = '';
         $this->price = '';
         $this->price_real = '';
         $this->category_id = '';
+        $this->editId = null;
     }
 
     private function deleteOldFrontPage()

@@ -14,27 +14,17 @@ class SalePromo extends Component
     public $search;
     public $datestart;
     public $dateend;
-    public $type_trips;
 
     public function mount()
     {
         $this->datestart = date('Y-m-01');
         $this->dateend = date('Y-m-d');
 
-        $this->type_trips = "";
     }
 
     public function render()
     {
         $saleinnsQuery = ModelsSalePromo::query();
-
-        
-
-        if ($this->type_trips !== "") {
-            $saleinnsQuery->where('type_trips', $this->type_trips);
-        } else if ($this->type_trips) {
-            $saleinnsQuery->where('type_trips', $this->type_trips);
-        }
 
 
         if ($this->search) {

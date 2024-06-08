@@ -116,7 +116,7 @@
             'active' => request()->routeIs('sale-promo  '),
         ],
         [
-            'name' => 'Ventas 2',
+            'name' => 'Otros',
             'icon' => 'fa-solid fa-sack-dollar',
             'route' => route('sale-delivery'),
             'active' => request()->routeIs('sale-delivery'),

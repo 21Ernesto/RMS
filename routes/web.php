@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ComplementController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InicioController;
@@ -36,9 +37,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
     Route::get('/menus', MenuManager::class)->name('menus.index');

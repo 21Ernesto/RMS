@@ -67,7 +67,7 @@
                         <div>
                             <label for="outstanding" class="block text-sm font-medium text-gray-700">Destacado:</label>
                             <div class="mt-2 flex items-center">
-                                <input type="checkbox" wire:model="outstanding" id="outstanding"
+                                <input type="checkbox" wire:model.defer="outstanding" id="outstanding"
                                     class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 rounded">
                                 <label for="outstanding" class="ml-2 block text-sm text-gray-900">Marcar como
                                     destacado</label>
