@@ -43,8 +43,8 @@
                                         </ul>
                                     </li>
                                     <li
-                                        class="{{ Request::is('contacto') ? 'active' : '' }}">
-                                        <a href="{{ route('contacto') }}"
+                                        class="{{ Request::is('contact') ? 'active' : '' }}">
+                                        <a href="{{ route('contact') }}"
                                             class="text-sm">Contacto</a>
                                     </li>
                                 </ul>

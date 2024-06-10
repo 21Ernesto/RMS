@@ -83,12 +83,12 @@ Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/comprafinalizada', [InicioController::class, 'exits'])->name('comprafinalizada');
 Route::get('/aviso_de_privacidad', [InicioController::class, 'privacy'])->name('privacidad');
 Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');
+Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/{slug}', [MenuController::class, 'show'])->name('menu.show');
 Route::get('/categoria/{slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/viaje/{slug}', [TripController::class, 'show'])->name('trip.show');
 
-Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
 Route::post('/enviar-formulario', [ContactController::class, 'enviarFormulario'])->name('formulario.enviar');
 
 Route::post('{trip}/stripe', [PaymentController::class, 'stripe'])->name('payment');

@@ -21,7 +21,7 @@
                                             <h1 class="slider-title">Cañón del Sumidero</h1>
                                             <p class="slider-short-desc">Explora este impresionante cañón que se eleva a más
                                                 de 1,000 metros sobre el nivel del mar.</p>
-                                            <div class="slider-btn-wrapper"><a href="{{ route('contacto') }}"
+                                            <div class="slider-btn-wrapper"><a href="{{ route('contact') }}"
                                                     class="theme-btn style-2">Contacto</a></div>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                             <p class="slider-short-desc">
                                                 Descubre la magia de estas cristalinas aguas turquesas que caen en cascada,
                                                 creando un espectáculo visual inolvidable. </p>
-                                            <div class="slider-btn-wrapper"><a href="{{ route('contacto') }}"
+                                            <div class="slider-btn-wrapper"><a href="{{ route('contact') }}"
                                                     class="theme-btn style-2">Contacto</a></div>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                             <h1 class="slider-title">Ciudad Maya Palenque</h1>
                                             <p class="slider-short-desc">Camina entre imponentes templos, como el Templo de
                                                 las Inscripciones, que guarda secretos ancestrales.</p>
-                                            <div class="slider-btn-wrapper"><a href="{{ route('contacto') }}"
+                                            <div class="slider-btn-wrapper"><a href="{{ route('contact') }}"
                                                     class="theme-btn style-2">Contacto</a></div>
                                         </div>
                                     </div>
