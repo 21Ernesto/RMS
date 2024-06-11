@@ -36,24 +36,6 @@
                         </div>
 
                         <div>
-                            <label for="front_page" class="block text-sm font-medium text-gray-700">Portada:</label>
-                            <input type="file" wire:model="front_page" id="front_page"
-                                class="mb-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block w-full">
-                            @error('front_page')
-                                <span class="text-red-400 text-xs">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="banner" class="block text-sm font-medium text-gray-700">Banner:</label>
-                            <input type="file" wire:model="banner" id="banner"
-                                class="mb-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block w-full">
-                            @error('banner')
-                                <span class="text-red-400 text-xs">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div>
                             <label for="day" class="block text-sm font-medium text-gray-700">Día:</label>
                             <input type="text" wire:model="day" id="day" placeholder="1"
                                 class="mb-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block w-full">
@@ -155,6 +137,11 @@
                                     <div class="text-sm text-gray-900">{{ $promotion->category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="{{ route('editPhototrip', $promotion) }}"
+                                        title="Editar {{ $promotion->name }}"
+                                        class="text-green-600 hover:text-green-900 mr-2">
+                                        <i class="fa-regular fa-image text-xl"></i>
+                                    </a>
                                     <button wire:click="edit({{ $promotion->id }})" @click="open = true"
                                         title="Editar {{ $promotion->name }}"
                                         class="text-indigo-600 hover:text-indigo-900 mr-2">

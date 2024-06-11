@@ -14,16 +14,7 @@
 
             <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all w-full max-w-3xl mx-auto">
                 <form wire:submit.prevent="saveCategory" class="mb-4 mt-4">
-                    <h1 class="pl-5 text-3xl font-semibold mb-4">Crear nueva categoría</h1>
-                    <div class="px-5 mb-3">
-                        <label for="image">Imagen:</label>
-                        <input type="file" wire:model="image" id="image" accept="image/*" 
-                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block w-full">
-                        @error('image')
-                            <span class="text-red-400 text-xs">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    
+                    <h1 class="pl-5 text-3xl font-semibold mb-4">Crear nueva categoría</h1>                    
                     <div class="px-5 mb-3">
                         <label for="name">Nombre:</label>
                         <input type="text" wire:model="name" id="name" placeholder="Nombre"
@@ -129,14 +120,19 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $category->menu->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
+                                    <a href="{{ route('editPhotoCategory', $category) }}"
+                                        title="Editar {{ $category->name }}"
+                                        class="text-green-600 hover:text-green-900 mr-2">
+                                        <i class="fa-regular fa-image text-xl"></i>
+                                    </a>
                                     <button wire:click="edit({{ $category->id }})" @click="open = true"
                                         title="Editar {{ $category->name }}"
                                         class="text-indigo-600 hover:text-indigo-900 mr-2">
-                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-edit text-xl"></i>
                                     </button>
                                     <button wire:click="delete({{ $category->id }})" title="Eliminar {{ $category->name }}"
                                         class="text-red-600 hover:text-red-900 mr-4">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt text-xl"></i>
                                     </button>
                                 </td>
                             </tr>

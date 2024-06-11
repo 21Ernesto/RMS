@@ -19,7 +19,6 @@ class Category extends Component
 
     public $name;
     public $slug;
-    public $image;
     public $key;
     public $menu_id;
     public $editId;
@@ -46,22 +45,10 @@ class Category extends Component
             'name' => 'required|string',
             'slug' => 'required|string|unique:categories,slug' . ($this->editId ? ',' . $this->editId : ''),
             'key' => 'required|string|max:255',
-            'image' => 'nullable|image',
             'menu_id' => 'required|exists:menus,id',
         ];
 
         $validatedData = $this->validate($rules, $this->messages);
-
-        if ($this->image) {
-            $this->deleteOldImage();
-            $imageName = time() . '_' . Str::random(10) . '.' . $this->image->getClientOriginalExtension();
-            $this->image->storeAs('public/images/categories', $imageName);
-            $validatedData['image'] = 'storage/images/categories/' . $imageName;
-
-            $this->image->delete();
-        } elseif ($this->editId) {
-            unset($validatedData['image']);
-        }
 
         if ($this->editId) {
             $category = CategoryModel::find($this->editId);
@@ -73,14 +60,6 @@ class Category extends Component
         $this->resetForm();
     }
 
-    private function deleteOldImage()
-    {
-        $category = CategoryModel::find($this->editId);
-        if ($category && $category->image) {
-            Storage::delete($category->image);
-        }
-    }
-
     public function edit($id)
     {
         $category = CategoryModel::findOrFail($id);
@@ -89,7 +68,6 @@ class Category extends Component
         $this->slug = $category->slug;
         $this->key = $category->key;
         $this->menu_id = $category->menu_id;
-        $this->image = null;
     }
 
     public function delete($id)
@@ -120,7 +98,6 @@ class Category extends Component
     {
         $this->name = '';
         $this->slug = '';
-        $this->image = '';
         $this->key = '';
         $this->menu_id = '';
     }

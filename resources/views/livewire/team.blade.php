@@ -15,14 +15,6 @@
             <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all w-full max-w-3xl mx-auto">
                 <form wire:submit.prevent="saveCategory" class="mb-4 mt-4">
                     <h1 class="pl-5 text-3xl font-semibold mb-4">Crear nuevo</h1>
-                    <div class="px-5 mb-3">
-                        <label for="image">Foto:</label>
-                        <input type="file" wire:model="image" id="image" accept="image/*" 
-                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block w-full">
-                        @error('image')
-                            <span class="text-red-400 text-xs">{{ $message }}</span>
-                        @enderror
-                    </div>
                     
                     <div class="px-5 mb-3">
                         <label for="name">Nombre:</label>
@@ -77,11 +69,16 @@
                         @foreach ($teams as $team)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ $team->image }}" class="h-20 w-20 rounded" alt="">
+                                    <img src="{{ asset($team->image) }}" class="h-20 w-20 rounded" alt="">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $team->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $team->position }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
+                                    <a href="{{ route('editPhotoTeam', $team) }}"
+                                        title="Editar {{ $team->name }}"
+                                        class="text-green-600 hover:text-green-900 mr-2">
+                                        <i class="fa-regular fa-image text-xl"></i>
+                                    </a>
                                     <button wire:click="edit({{ $team->id }})" @click="open = true"
                                         title="Editar {{ $team->name }}"
                                         class="text-indigo-600 hover:text-indigo-900 mr-2">

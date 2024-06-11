@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('front_page');
-            $table->string('banner');
+            $table->string('front_page')->nullable();
+            $table->string('banner')->nullable();
             $table->string('day');
             $table->boolean('outstanding')->nullable()->default(false);
             $table->string('first_email')->nullable();

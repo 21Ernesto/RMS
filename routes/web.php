@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImageCategoryController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\ImageTeamController;
+use App\Http\Controllers\Admin\ImageTripController;
+use App\Http\Controllers\CarGalleryController;
 use App\Http\Controllers\ComplementController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InicioController;
@@ -37,9 +42,22 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // EDITAR 
+    Route::get('/imagen-categoria/{category}/edit', [ImageCategoryController::class, 'edit'])->name('editPhotoCategory');
+    Route::put('/imagen-categoria/{category}', [ImageCategoryController::class, 'update'])->name('updateImageCategory');
+
+    Route::get('/imagen-trip/{trip}/edit', [ImageTripController::class, 'edit'])->name('editPhototrip');
+    Route::put('/imagen-trip/{trip}', [ImageTripController::class, 'update'])->name('updateImagetrip');
+
+    Route::get('/imagen-team/{team}/edit', [ImageTeamController::class, 'edit'])->name('editPhotoTeam');
+    Route::put('/imagen-team/{team}', [ImageTeamController::class, 'update'])->name('updateImageTeam');
+
+    Route::get('image-complement/{trip}', [ImageController::class, 'index'])->name('image.index');
+    Route::post('image-complement/store', [ImageController::class, 'store'])->name('image.store');
+    Route::delete('image-complement/{id}', [ImageController::class, 'destroy'])->name('image.destroy');
 
     Route::get('/menus', MenuManager::class)->name('menus.index');
     Route::get('/categorias', Category::class)->name('categories.index');
@@ -52,7 +70,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/temporada', Season::class)->name('seaseons.index');
     Route::get('/users', User::class)->name('users.index');
     Route::get('/mails', Mail::class)->name('mails.index');
-    Route::get('/cars-gallery', CarGallery::class)->name('cars.index');
+    Route::resource('car_galleries', CarGalleryController::class)->names('cars');
     Route::get('/teams', Team::class)->name('teams.index');
 
 
