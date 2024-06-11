@@ -32,9 +32,12 @@
                             <div class="content">
                                 <h2 class="title">Teléfono</h2>
                                 <div class="info">
-                                    <a href="tel:9161291321" class="desc"> 916-129-1321</a>
-                                    <a href="tel:9163412188" class="desc"> 916-341-2188</a>
-                                    <a href="tel:9161291321" class="desc">916-129-1321</a>
+                                    <a href="tel:9161291321" class="desc"> <span class="fw-bold">Celular:</span>
+                                        916-129-1321</a>
+                                    <a href="tel:9163412188" class="desc"> <span class="fw-bold">Fijo:</span>
+                                        916-341-2188</a>
+                                    <a href="tel:9161291321" class="desc"> <span class="fw-bold">Celular:</span>
+                                        916-129-1321</a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +52,8 @@
                                 <div class="info">
                                     <a href="mailto:rutasdelsureste@live.com.mx"
                                         class="desc">rutasdelsureste@live.com.mx</a>
-
+                                    <a href="ttmayasa@hotmail.com" class="desc">
+                                        ttmayasa@hotmail.com</a>
                                 </div>
                             </div>
                         </div>
@@ -103,13 +107,15 @@
                                     <div class="col-xl-6">
                                         <div class="contacts-phone">
                                             <label for="phone">Número de personas</label>
-                                            <input name="phone" id="phone" type="text" placeholder="Número de personas">
+                                            <input name="phone" id="phone" type="text"
+                                                placeholder="Número de personas">
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="contacts-subject">
                                             <label for="subject">Fecha aproximada</label>
-                                            <input name="subject" id="subject" type="text" placeholder="Fecha aproximada">
+                                            <input name="subject" id="subject" type="text"
+                                                placeholder="Fecha aproximada">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
@@ -123,7 +129,7 @@
                                     </div>
                                 </div>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>

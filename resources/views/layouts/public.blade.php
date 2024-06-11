@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
-    <meta name="description" content="Rutas Mayas Sureste - Agencia de Viajes y Tours">
+    <meta name="description" content="Rutas Mayas del Sureste - Agencia de Viajes y Tours">
     <meta name="keywords"
         content="rutas mayas, sureste, viajes, tours, paquetes turísticos, agencia de viajes, aventura, exploración, escapada, guía de viaje, destinos turísticos, cultura maya">
 

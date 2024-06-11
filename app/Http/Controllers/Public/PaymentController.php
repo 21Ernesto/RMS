@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SaleInn\CompraRealizada;
+use App\Mail\SaleInn\CorreoAdmin;
+use App\Mail\SaleInn\Proveedor;
+use App\Models\Mail as ModelsMail;
 use App\Models\SaleInn;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -74,6 +80,26 @@ class PaymentController extends Controller
             $payment->total =  session()->get('total');
             $payment->total_real =  session()->get('total_real');
             $payment->save();
+
+            $emails = [];
+            if ($trip->first_email !== null) {
+                $emails[] = $trip->first_email;
+            }
+            if ($trip->second_email !== null) {
+                $emails[] = $trip->second_email;
+            }
+
+            $email1 = New CompraRealizada($payment);
+            Mail::to($response->customer_details->email)->send($email1);
+            
+            if (!empty($emails)) {
+                Mail::to($emails)->send(new Proveedor($payment));
+            }
+
+            $correos = ModelsMail::pluck('email')->toArray();
+            foreach ($correos as $correoDestino) {
+                Mail::to($correoDestino)->send(new CorreoAdmin($payment));
+            }
 
             return redirect()->route('comprafinalizada');
 

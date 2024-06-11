@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\SalePromo;
 
-use App\Models\Purchase;
+use App\Models\SalePromo;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class CorreoAdmin extends Mailable
+class CompraRealizada extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $purchase;
+    public $payment;
 
-    public function __construct(Purchase $purchase)
+    public function __construct(SalePromo $payment)
     {
-        $this->purchase = $purchase;
+        $this->payment = $payment;
     }
 
     public function build()
     {
         try {
-            return $this->view('public.email.notificacion_admin')->with('purchase', $this->purchase);
-    
+            return $this->view('public.email.SalePromo.compra_realizada')->with('payment', $this->payment);
+
         } catch (\Exception $e) {
             Log::error('Error al construir el correo electrónico: ' . $e->getMessage());
         }

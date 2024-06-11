@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SaleDelivery\CompraRealizada;
+use App\Mail\SaleDelivery\CorreoAdmin;
+use App\Mail\SaleDelivery\Proveedor;
+use App\Models\Mail as ModelsMail;
 use App\Models\SaleDelivery;
-use App\Models\SalePromo;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class PaymentPackageController extends Controller
 {
@@ -65,6 +70,8 @@ class PaymentPackageController extends Controller
             $payment = new SaleDelivery();
             $payment->uuid = 'FAC-'.$uppercaseUuid;
             $payment->payment_id = $response->id;
+            $payment->trip_name = $trip->name;
+            $payment->hotel_name = $packageDelivery->hotel_name;
             $payment->quantity_simple = session()->get('quantity_simple');
             $payment->quantity_double = session()->get('quantity_double');
             $payment->quantity_triple = session()->get('quantity_triple');
@@ -94,8 +101,27 @@ class PaymentPackageController extends Controller
             $payment->client_children_under_10 = $packageDelivery->client_children_under_10;
             $payment->save();
 
-            return redirect()->route('comprafinalizada');
+            $emails = [];
+            if ($trip->first_email !== null) {
+                $emails[] = $trip->first_email;
+            }
+            if ($trip->second_email !== null) {
+                $emails[] = $trip->second_email;
+            }
 
+            $email1 = New CompraRealizada($payment);
+            Mail::to($response->customer_details->email)->send($email1);
+            
+            if (!empty($emails)) {
+                Mail::to($emails)->send(new Proveedor($payment));
+            }
+
+            $correos = ModelsMail::pluck('email')->toArray();
+            foreach ($correos as $correoDestino) {
+                Mail::to($correoDestino)->send(new CorreoAdmin($payment));
+            }
+
+            return redirect()->route('comprafinalizada');
 
             session()->forget('quantity_simple');
             session()->forget('quantity_double');

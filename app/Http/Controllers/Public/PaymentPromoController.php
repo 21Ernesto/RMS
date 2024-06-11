@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SalePromo\CompraRealizada;
+use App\Mail\SalePromo\CorreoAdmin;
+use App\Mail\SalePromo\Proveedor;
+use App\Models\Mail as ModelsMail;
 use App\Models\SalePromo;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 class PaymentPromoController extends Controller
 {
     public function stripe(Request $request, Trip $trip)
@@ -63,6 +68,8 @@ class PaymentPromoController extends Controller
             $payment->quantity_child = session()->get('quantity_child');
             $payment->quantity_adult = session()->get('quantity_adult');
             $payment->datestart = session()->get('date_start');
+            $payment->trip_name = $trip->name;
+            $payment->hotel_name = $promoInn->hotel_name;
             $payment->type_trips = $trip->type_trips;
             $payment->currency = $response->currency;
             $payment->customer_name = $response->customer_details->name;
@@ -78,6 +85,28 @@ class PaymentPromoController extends Controller
             $payment->adult_price_provider = $promoInn->adult_price_provider;
             $payment->child_price_provider = $promoInn->child_price_provider;
             $payment->save();
+
+            $payment->load('trip', 'promoInn'); 
+
+            $emails = [];
+            if ($trip->first_email !== null) {
+                $emails[] = $trip->first_email;
+            }
+            if ($trip->second_email !== null) {
+                $emails[] = $trip->second_email;
+            }
+
+            $email1 = New CompraRealizada($payment);
+            Mail::to($response->customer_details->email)->send($email1);
+            
+            if (!empty($emails)) {
+                Mail::to($emails)->send(new Proveedor($payment));
+            }
+
+            $correos = ModelsMail::pluck('email')->toArray();
+            foreach ($correos as $correoDestino) {
+                Mail::to($correoDestino)->send(new CorreoAdmin($payment));
+            }
 
             return redirect()->route('comprafinalizada');
 

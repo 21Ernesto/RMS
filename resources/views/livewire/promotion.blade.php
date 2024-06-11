@@ -158,6 +158,9 @@
                                     <a href="{{ route('promotions.complement', $promotion) }}" title="Complementos" class="text-violet-600 hover:text-violet-900">
                                         <i class="fa-solid fa-list text-xl"></i>
                                     </a>
+                                    <a href="{{ route('image.index', $promotion) }}" title="Complementos" class="text-violet-600 hover:text-violet-900">
+                                        <i class="fa-solid fa-photo-film text-xl ml-3"></i>
+                                    </a>    
                                 </td>
                             </tr>
                         @endforeach
