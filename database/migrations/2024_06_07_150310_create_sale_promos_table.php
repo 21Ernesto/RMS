@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('uuid')->nullable();
             $table->string('payment_id');
 
+            $table->string('trip_name');
+            $table->string('hotel_name');
             $table->integer('quantity_child')->nullable();
             $table->integer('quantity_adult')->nullable();
 

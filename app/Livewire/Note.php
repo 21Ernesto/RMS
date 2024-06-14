@@ -22,7 +22,7 @@ class Note extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $notes = ModelsNote::where('trip_id', $this->trip->id)->paginate(10);
+        $notes = ModelsNote::where('trip_id', $this->trip->id)->get();
         return view('livewire.note', compact('notes'));
     }
 

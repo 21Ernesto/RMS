@@ -21,7 +21,7 @@ class FoodComponent extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $foods = Food::where('trip_id', $this->trip->id)->paginate(10);
+        $foods = Food::where('trip_id', $this->trip->id)->get();
         return view('livewire.food-component', compact('foods'));
     }
 

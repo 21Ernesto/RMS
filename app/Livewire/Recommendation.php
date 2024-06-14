@@ -22,7 +22,7 @@ class Recommendation extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $recommendations = ModelsRecommendation::where('trip_id', $this->trip->id)->paginate(10);
+        $recommendations = ModelsRecommendation::where('trip_id', $this->trip->id)->get();
         return view('livewire.recommendation', compact('recommendations'));
     }
 

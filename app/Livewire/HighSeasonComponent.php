@@ -21,7 +21,7 @@ class HighSeasonComponent extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $highSeasons = HighSeason::where('trip_id', $this->trip->id)->paginate(10);
+        $highSeasons = HighSeason::where('trip_id', $this->trip->id)->get();
         return view('livewire.high-season-component', compact('highSeasons'));
     }
 

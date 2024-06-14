@@ -22,7 +22,7 @@ class Schedule extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $schedules = ModelsSchedule::where('trip_id', $this->trip->id)->paginate(10);
+        $schedules = ModelsSchedule::where('trip_id', $this->trip->id)->get();
         return view('livewire.schedule', compact('schedules'));
     }
 

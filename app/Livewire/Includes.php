@@ -21,7 +21,7 @@ class Includes extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $includes = ModelsIncludes::where('trip_id', $this->trip->id)->paginate(10);
+        $includes = ModelsIncludes::where('trip_id', $this->trip->id)->get();
         return view('livewire.includes', compact('includes'));
     }
 

@@ -21,7 +21,7 @@ class Excluded extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $excludeds = ModelsExcluded::where('trip_id', $this->trip->id)->paginate(10);
+        $excludeds = ModelsExcluded::where('trip_id', $this->trip->id)->get();
         return view('livewire.excluded', compact('excludeds'));
     }
 

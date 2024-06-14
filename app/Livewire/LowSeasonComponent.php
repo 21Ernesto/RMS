@@ -21,7 +21,7 @@ class LowSeasonComponent extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $lowSeasons = LowSeason::where('trip_id', $this->trip->id)->paginate(10);
+        $lowSeasons = LowSeason::where('trip_id', $this->trip->id)->get();
         return view('livewire.low-season-component', compact('lowSeasons'));
     }
 

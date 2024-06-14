@@ -23,7 +23,7 @@ class Message extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $messages = ModelsMessage::where('trip_id', $this->trip->id)->paginate(10);
+        $messages = ModelsMessage::where('trip_id', $this->trip->id)->get();
         return view('livewire.message', compact('messages'));
     }
 

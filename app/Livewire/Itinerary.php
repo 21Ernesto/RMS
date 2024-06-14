@@ -22,7 +22,7 @@ class Itinerary extends Component
     public function render()
     {
         $this->trip_id = $this->trip->id;
-        $itineraries = ModelsItinerary::where('trip_id', $this->trip->id)->paginate(10);
+        $itineraries = ModelsItinerary::where('trip_id', $this->trip->id)->get();
         return view('livewire.itinerary', compact('itineraries'));
     }
 
