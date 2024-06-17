@@ -3,24 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\Team as ModelsTeam;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Team extends Component
 {
-
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
-    public $position;
-    public $editId;
 
+    public $position;
+
+    public $editId;
 
     public function updatingSearch()
     {
@@ -29,18 +27,19 @@ class Team extends Component
 
     public function render()
     {
-        $teams = ModelsTeam::where('name', 'like', '%' . $this->search . '%')->paginate(8);
+        $teams = ModelsTeam::where('name', 'like', '%'.$this->search.'%')->paginate(8);
+
         return view('livewire.team', compact('teams'))->layout('layouts.admin');
     }
 
     public function saveCategory()
     {
-        
+
         $rules = [
             'name' => 'required|string',
             'position' => 'required|string',
         ];
-        
+
         $validatedData = $this->validate($rules);
 
         if ($this->editId) {

@@ -26,9 +26,9 @@ class ImageCategoryController extends Controller
             if (File::exists(public_path($category->image))) {
                 File::delete(public_path($category->image));
             }
-            $imageName = 'category_' . time() . '.' . $request->image->extension();
+            $imageName = 'category_'.time().'.'.$request->image->extension();
             $request->file('image')->move(public_path('images/category'), $imageName);
-            $validatedData['image'] = 'images/category/' . $imageName;
+            $validatedData['image'] = 'images/category/'.$imageName;
         }
 
         $category->update($validatedData);

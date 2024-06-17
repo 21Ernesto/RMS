@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('percentage', 10, 2);
             $table->timestamps();
         });
-        
+
     }
 
     /**

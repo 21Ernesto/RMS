@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Recommendation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -90,22 +89,16 @@ class Trip extends Model
         return $this->hasMany(Image::class);
     }
 
-
-    
     public function saleDeliveries()
     {
         return $this->hasMany(SaleDelivery::class);
     }
 
-
-
-
-    // 
+    //
     public function promoinns()
     {
         return $this->hasMany(PromoInn::class);
     }
-
 
     public function packageDeliveries()
     {

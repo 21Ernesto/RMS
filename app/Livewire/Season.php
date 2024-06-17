@@ -8,27 +8,31 @@ use Livewire\WithPagination;
 
 class Season extends Component
 {
-
     use WithPagination;
 
     public $search;
 
     public $name;
+
     public $datestart;
+
     public $dateend;
+
     public $percentage;
+
     public $editId;
 
     public function render()
     {
-        $seasons = ModelsSeason::where('name', 'like', '%' . $this->search . '%')->paginate(8);
+        $seasons = ModelsSeason::where('name', 'like', '%'.$this->search.'%')->paginate(8);
+
         return view('livewire.season', compact('seasons'))->layout('layouts.admin');
     }
 
     public function save()
     {
         $this->validate([
-            'name' => 'required|string|max:255|unique:seasons,name,' . $this->editId,
+            'name' => 'required|string|max:255|unique:seasons,name,'.$this->editId,
             'datestart' => 'required|date',
             'dateend' => 'required|date',
             'percentage' => 'required|numeric',
@@ -63,7 +67,6 @@ class Season extends Component
         $this->dateend = $season->dateend; // Corregido aquí
         $this->percentage = $season->percentage; // Corregido aquí
     }
-
 
     public function delete($id)
     {

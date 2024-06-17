@@ -11,7 +11,6 @@ class Image extends Model
 
     protected $fillable = ['image', 'trip_id'];
 
-
     public function trip()
     {
         return $this->belongsTo(Trip::class);

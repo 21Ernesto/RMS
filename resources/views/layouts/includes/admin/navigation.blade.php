@@ -14,7 +14,7 @@
                     </svg>
                 </button>
                 {{--  --}}
-                Rutas Mayas del Suroeste
+                Rutas Mayas del Sureste
             </div>
             <div class="flex items-center">
                 <x-dropdown align="right" width="48">

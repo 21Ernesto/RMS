@@ -10,9 +10,10 @@ class SalePromo extends Component
 {
     use WithPagination;
 
-    
     public $search;
+
     public $datestart;
+
     public $dateend;
 
     public function mount()
@@ -26,9 +27,8 @@ class SalePromo extends Component
     {
         $saleinnsQuery = ModelsSalePromo::query();
 
-
         if ($this->search) {
-            $saleinnsQuery->where('uuid', 'like', '%' . $this->search . '%');
+            $saleinnsQuery->where('uuid', 'like', '%'.$this->search.'%');
         }
 
         if ($this->datestart) {
@@ -48,7 +48,6 @@ class SalePromo extends Component
             $total_real += $saleinn->total_real;
 
         }
-
 
         return view('livewire.sale-promo', compact('saleinns', 'total', 'total_real'));
     }

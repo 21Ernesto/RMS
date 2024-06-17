@@ -12,19 +12,15 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PackageDeliveryController;
 use App\Http\Controllers\PromoInnController;
-
 use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Public\MenuController;
 use App\Http\Controllers\Public\PaymentController;
 use App\Http\Controllers\Public\PaymentPackageController;
 use App\Http\Controllers\Public\PaymentPromoController;
 use App\Http\Controllers\Public\TripController;
-
 use App\Http\Controllers\SaleDeliveryController;
 use App\Http\Controllers\SaleInnController;
 use App\Http\Controllers\SalePromoController;
-
-use App\Livewire\CarGallery;
 use App\Livewire\Category;
 use App\Livewire\FriendsCombo;
 use App\Livewire\Mail;
@@ -39,13 +35,11 @@ use App\Livewire\TravelPackage;
 use App\Livewire\User;
 use Illuminate\Support\Facades\Route;
 
-
-
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // EDITAR 
+    // EDITAR
     Route::get('/imagen-categoria/{category}/edit', [ImageCategoryController::class, 'edit'])->name('editPhotoCategory');
     Route::put('/imagen-categoria/{category}', [ImageCategoryController::class, 'update'])->name('updateImageCategory');
 
@@ -73,20 +67,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('car_galleries', CarGalleryController::class)->names('cars');
     Route::get('/teams', Team::class)->name('teams.index');
 
-
     Route::get('sale-inn', [SaleInnController::class, 'index'])->name('sale-inn');
     Route::get('sale-promo', [SalePromoController::class, 'index'])->name('sale-promo');
     Route::get('sale-delivery', [SaleDeliveryController::class, 'index'])->name('sale-delivery');
 
-
     Route::get('promotions/{trip}/hotel', [PromoInnController::class, 'show'])->name('promotions.hotel');
-
 
     Route::get('packages/{trip}/hotel', [PackageDeliveryController::class, 'show'])->name('packages.hotel');
     Route::get('paque-viajes/{trip}/hotel', [PackageDeliveryController::class, 'show'])->name('paqueviajes.hotel');
     Route::get('tren-maya/{trip}/hotel', [PackageDeliveryController::class, 'show'])->name('trenmaya.hotel');
-
-
 
     Route::get('tour/{trip}/complement', [ComplementController::class, 'show'])->name('tours.complement');
     Route::get('paquete/{trip}/complement', [ComplementController::class, 'show'])->name('packages.complement');
@@ -95,7 +84,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('combo-amigo/{trip}/complement', [ComplementController::class, 'show'])->name('comboamigos.complement');
     Route::get('tren-maya/{trip}/complement', [ComplementController::class, 'show'])->name('trenmaya.complement');
 });
-
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/comprafinalizada', [InicioController::class, 'exits'])->name('comprafinalizada');

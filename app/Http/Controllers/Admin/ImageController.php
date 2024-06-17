@@ -14,9 +14,9 @@ class ImageController extends Controller
     {
         $trip = Trip::findOrFail($trip);
         $images = Image::all();
+
         return view('admin.image.image-complement', compact('images', 'trip'));
     }
-    
 
     public function store(Request $request)
     {
@@ -25,16 +25,16 @@ class ImageController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imageName = time() . '.' . $request->image->extension();
+        $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
         Image::create([
             'trip_id' => $request->trip_id,
-            'image' => 'images/' . $imageName,
+            'image' => 'images/'.$imageName,
         ]);
 
         return redirect()->back();
-        
+
     }
 
     public function destroy($id)

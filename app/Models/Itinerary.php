@@ -11,7 +11,6 @@ class Itinerary extends Model
 
     protected $fillable = ['title', 'description', 'trip_id'];
 
-
     public function trip()
     {
         return $this->belongsTo(Trip::class);

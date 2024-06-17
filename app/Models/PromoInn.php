@@ -26,5 +26,4 @@ class PromoInn extends Model
     {
         return $this->belongsTo(Trip::class);
     }
-    
 }

@@ -11,7 +11,6 @@ class Suggestion extends Model
 
     protected $fillable = ['description', 'trip_id'];
 
-
     public function trip()
     {
         return $this->belongsTo(Trip::class);

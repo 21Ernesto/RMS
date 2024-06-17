@@ -4,29 +4,34 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Trip;
-use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class TravelPackage extends Component
 {
-
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
-   
-    
+
     public $day;
+
     public $outstanding = false;
+
     public $first_email;
+
     public $second_email;
+
     public $type_trips = 'travelpackages';
+
     public $category_id;
+
     public $editId;
 
     public function updatingSearch()
@@ -36,7 +41,7 @@ class TravelPackage extends Component
 
     public function render()
     {
-        $travelpackages = Trip::where('name', 'like', '%' . $this->search . '%')->where('type_trips', 'travelpackages')->paginate(8);
+        $travelpackages = Trip::where('name', 'like', '%'.$this->search.'%')->where('type_trips', 'travelpackages')->paginate(8);
         $categories = Category::where('key', 'travelpackages')->get();
 
         return view('livewire.travel-package', compact('travelpackages', 'categories'))->layout('layouts.admin');
@@ -46,9 +51,8 @@ class TravelPackage extends Component
     {
         $validatedData = $this->validate([
             'name' => 'required|string',
-            'slug' => 'required|string|unique:trips,slug' . ($this->editId ? ',' . $this->editId : ''),
-            
-            
+            'slug' => 'required|string|unique:trips,slug'.($this->editId ? ','.$this->editId : ''),
+
             'day' => 'required|integer',
             'outstanding' => 'nullable|boolean',
             'first_email' => 'required',
@@ -56,10 +60,6 @@ class TravelPackage extends Component
             'type_trips' => 'required',
             'category_id' => 'required',
         ]);
-
-        
-
-        
 
         if ($this->editId) {
             $this->update($validatedData);
@@ -88,8 +88,7 @@ class TravelPackage extends Component
         $package = Trip::findOrFail($id);
         $this->name = $package->name;
         $this->slug = $package->slug;
-        
-        
+
         $this->day = $package->day;
         $this->outstanding = (bool) $package->outstanding;
         $this->first_email = $package->first_email;
@@ -132,16 +131,11 @@ class TravelPackage extends Component
     {
         $this->name = '';
         $this->slug = '';
-        
-        
+
         $this->day = '';
         $this->outstanding = false;
         $this->first_email = '';
         $this->second_email = '';
         $this->category_id = '';
     }
-
-    
-
-    
 }

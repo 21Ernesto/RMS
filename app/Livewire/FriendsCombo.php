@@ -4,30 +4,38 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Trip;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Illuminate\Support\Str;
 
 class FriendsCombo extends Component
 {
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
-   
-    
+
     public $day;
+
     public $outstanding = false;
+
     public $first_email;
+
     public $second_email;
+
     public $price;
+
     public $price_real;
+
     public $type_trips = 'friendscombos';
+
     public $category_id;
+
     public $editId;
 
     public function updatingSearch()
@@ -37,7 +45,7 @@ class FriendsCombo extends Component
 
     public function render()
     {
-        $friendCombos = Trip::where('name', 'like', '%' . $this->search . '%')->where('type_trips', 'friendscombos')->paginate(8);
+        $friendCombos = Trip::where('name', 'like', '%'.$this->search.'%')->where('type_trips', 'friendscombos')->paginate(8);
         $categories = Category::where('key', 'friendscombos')->get();
 
         return view('livewire.friends-combo', compact('friendCombos', 'categories'))->layout('layouts.admin');
@@ -47,9 +55,8 @@ class FriendsCombo extends Component
     {
         $validatedData = $this->validate([
             'name' => 'required|string',
-            'slug' => 'required|string|unique:trips,slug' . ($this->editId ? ',' . $this->editId : ''),
-            
-            
+            'slug' => 'required|string|unique:trips,slug'.($this->editId ? ','.$this->editId : ''),
+
             'day' => 'required|integer',
             'outstanding' => 'nullable|boolean',
             'first_email' => 'required',
@@ -59,10 +66,6 @@ class FriendsCombo extends Component
             'type_trips' => 'required',
             'category_id' => 'required',
         ]);
-
-        
-
-        
 
         if ($this->editId) {
             $this->update($validatedData);
@@ -91,8 +94,7 @@ class FriendsCombo extends Component
         $friendsCombo = Trip::findOrFail($id);
         $this->name = $friendsCombo->name;
         $this->slug = $friendsCombo->slug;
-        
-        
+
         $this->day = $friendsCombo->day;
         $this->outstanding = (bool) $friendsCombo->outstanding;
         $this->first_email = $friendsCombo->first_email;
@@ -105,8 +107,6 @@ class FriendsCombo extends Component
     public function delete($id)
     {
         $friendsCombo = Trip::findOrFail($id);
-
-        
 
         $friendsCombo->delete();
     }
@@ -125,8 +125,7 @@ class FriendsCombo extends Component
     {
         $this->name = '';
         $this->slug = '';
-        
-        
+
         $this->day = '';
         $this->outstanding = false;
         $this->first_email = '';
@@ -135,8 +134,4 @@ class FriendsCombo extends Component
         $this->price_real = '';
         $this->category_id = '';
     }
-
-    
-
-    
 }

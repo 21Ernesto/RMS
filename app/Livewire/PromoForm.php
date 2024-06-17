@@ -8,16 +8,20 @@ use Livewire\Component;
 
 class PromoForm extends Component
 {
-
     public $trip;
+
     public $hotels;
+
     public $selectedHotel = null;
 
     public $adult = 0;
+
     public $child = 0;
 
     public $total = 0;
+
     public $total_real = 0;
+
     public $date_start;
 
     public function mount($trip)
@@ -49,13 +53,12 @@ class PromoForm extends Component
             $total_adult_real = ($this->adult > 0) ? ($this->adult / 2) * $hotel->adult_price_provider : 0;
             $total_child_real = ($this->child > 0) ? $this->child * $hotel->child_price_provider : 0;
 
-            $this->total_real = $total_adult_real+ $total_child_real;
+            $this->total_real = $total_adult_real + $total_child_real;
 
             // Aplicar el porcentaje de la temporada si corresponde
             $this->applySeasonPercentage();
         }
     }
-
 
     public function applySeasonPercentage()
     {

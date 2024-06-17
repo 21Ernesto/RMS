@@ -10,9 +10,8 @@ use App\Models\Mail as ModelsMail;
 use App\Models\SaleDelivery;
 use App\Models\Trip;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PaymentPackageController extends Controller
 {
@@ -62,7 +61,6 @@ class PaymentPackageController extends Controller
         $uuid = Str::uuid();
         $uppercaseUuid = strtoupper(str_replace('-', '', substr($uuid, -8)));
 
-
         if (isset($request->session_id)) {
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
@@ -84,8 +82,8 @@ class PaymentPackageController extends Controller
             $payment->customer_email = $response->customer_details->email;
             $payment->payment_method = 'Stripe';
             $payment->payment_status = $response->status;
-            $payment->total =  session()->get('total');
-            $payment->total_real =  session()->get('total_real');
+            $payment->total = session()->get('total');
+            $payment->total_real = session()->get('total_real');
             $payment->trip_id = $trip->id;
             $payment->package_delivery_id = $packageDelivery->id;
 
@@ -109,10 +107,10 @@ class PaymentPackageController extends Controller
                 $emails[] = $trip->second_email;
             }
 
-            $email1 = New CompraRealizada($payment);
+            $email1 = new CompraRealizada($payment);
             Mail::to($response->customer_details->email)->send($email1);
-            
-            if (!empty($emails)) {
+
+            if (! empty($emails)) {
                 Mail::to($emails)->send(new Proveedor($payment));
             }
 

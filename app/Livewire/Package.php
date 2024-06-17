@@ -4,27 +4,34 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Trip;
-use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Package extends Component
 {
-
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
+
     public $day;
+
     public $outstanding = false;
+
     public $first_email;
+
     public $second_email;
+
     public $type_trips = 'packages';
+
     public $category_id;
+
     public $editId;
 
     public function updatingSearch()
@@ -34,7 +41,7 @@ class Package extends Component
 
     public function render()
     {
-        $packages = Trip::where('name', 'like', '%' . $this->search . '%')->where('type_trips', 'packages')->paginate(8);
+        $packages = Trip::where('name', 'like', '%'.$this->search.'%')->where('type_trips', 'packages')->paginate(8);
         $categories = Category::where('key', 'packages')->get();
 
         return view('livewire.package', compact('packages', 'categories'))->layout('layouts.admin');
@@ -44,7 +51,7 @@ class Package extends Component
     {
         $validatedData = $this->validate([
             'name' => 'required|string',
-            'slug' => 'required|string|unique:trips,slug' . ($this->editId ? ',' . $this->editId : ''),
+            'slug' => 'required|string|unique:trips,slug'.($this->editId ? ','.$this->editId : ''),
             'day' => 'required|integer',
             'outstanding' => 'nullable|boolean',
             'first_email' => 'required',
@@ -52,7 +59,7 @@ class Package extends Component
             'type_trips' => 'required',
             'category_id' => 'required',
         ]);
-        
+
         if ($this->editId) {
             $package = Trip::find($this->editId);
             $package->update($validatedData);
@@ -103,16 +110,11 @@ class Package extends Component
     {
         $this->name = '';
         $this->slug = '';
-        
-        
+
         $this->day = '';
         $this->outstanding = false;
         $this->first_email = '';
         $this->second_email = '';
         $this->category_id = '';
     }
-
-    
-
-    
 }

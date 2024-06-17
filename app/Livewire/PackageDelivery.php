@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 
 class PackageDelivery extends Component
 {
-
     use WithPagination;
 
     public $search;
@@ -16,31 +15,42 @@ class PackageDelivery extends Component
     public $trip;
 
     public $hotel_name;
+
     public $days_nights;
+
     public $city;
 
     public $provider_simple;
+
     public $provider_double;
+
     public $provider_triple;
+
     public $provider_quadruple;
+
     public $provider_children_under_10;
+
     public $client_simple;
+
     public $client_double;
+
     public $client_triple;
+
     public $client_quadruple;
+
     public $client_children_under_10;
 
-
-
     public $stars;
+
     public $trip_id;
+
     public $editId;
 
     public function render()
     {
         $this->trip_id = $this->trip->id;
 
-        $packagedeliveries = ModelsPackageDelivery::where('hotel_name', 'like', '%' . $this->search . '%')->where('trip_id', $this->trip->id)->paginate(8);
+        $packagedeliveries = ModelsPackageDelivery::where('hotel_name', 'like', '%'.$this->search.'%')->where('trip_id', $this->trip->id)->paginate(8);
 
         return view('livewire.package-delivery', compact('packagedeliveries'));
     }
@@ -86,7 +96,7 @@ class PackageDelivery extends Component
         $this->hotel_name = $packagedelivery->hotel_name;
         $this->days_nights = $packagedelivery->days_nights;
         $this->city = $packagedelivery->city;
-        
+
         $this->provider_simple = $packagedelivery->provider_simple;
         $this->provider_double = $packagedelivery->provider_double;
         $this->provider_triple = $packagedelivery->provider_triple;
@@ -97,7 +107,7 @@ class PackageDelivery extends Component
         $this->client_triple = $packagedelivery->client_triple;
         $this->client_quadruple = $packagedelivery->client_quadruple;
         $this->client_children_under_10 = $packagedelivery->client_children_under_10;
-        
+
         $this->stars = $packagedelivery->stars;
     }
 
@@ -115,7 +125,7 @@ class PackageDelivery extends Component
         $this->provider_double = '';
         $this->provider_triple = '';
         $this->provider_quadruple = '';
-        $this->provider_children_under_10 ='';
+        $this->provider_children_under_10 = '';
         $this->client_simple = '';
         $this->client_double = '';
         $this->client_triple = '';

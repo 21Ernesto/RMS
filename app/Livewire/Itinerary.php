@@ -11,18 +11,24 @@ class Itinerary extends Component
     use WithPagination;
 
     public $search;
-    public $trip;
-    public $itinerary;
-    public $title = '';
-    public $description = '';
-    public $trip_id;
-    public $editId;
 
+    public $trip;
+
+    public $itinerary;
+
+    public $title = '';
+
+    public $description = '';
+
+    public $trip_id;
+
+    public $editId;
 
     public function render()
     {
         $this->trip_id = $this->trip->id;
         $itineraries = ModelsItinerary::where('trip_id', $this->trip->id)->get();
+
         return view('livewire.itinerary', compact('itineraries'));
     }
 
@@ -53,7 +59,6 @@ class Itinerary extends Component
         $this->title = $itinerary->title;
         $this->description = $itinerary->description;
     }
-
 
     public function cancelEdit()
     {

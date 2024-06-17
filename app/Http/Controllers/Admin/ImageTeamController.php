@@ -26,9 +26,9 @@ class ImageTeamController extends Controller
             if (File::exists(public_path($team->image))) {
                 File::delete(public_path($team->image));
             }
-            $imageName = 'team_' . time() . '.' . $request->image->extension();
+            $imageName = 'team_'.time().'.'.$request->image->extension();
             $request->file('image')->move(public_path('images/team'), $imageName);
-            $validatedData['image'] = 'images/team/' . $imageName;
+            $validatedData['image'] = 'images/team/'.$imageName;
         }
 
         $team->update($validatedData);

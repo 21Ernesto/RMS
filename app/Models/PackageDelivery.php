@@ -29,7 +29,6 @@ class PackageDelivery extends Model
         'trip_id',
     ];
 
-
     public function trip()
     {
         return $this->belongsTo(Trip::class);
@@ -39,5 +38,4 @@ class PackageDelivery extends Model
     {
         return $this->hasMany(SaleDelivery::class);
     }
-    
 }

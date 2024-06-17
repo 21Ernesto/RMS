@@ -4,26 +4,34 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Trip;
-use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class MayanTrain extends Component
 {
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
+
     public $day;
+
     public $outstanding = false;
+
     public $first_email;
+
     public $second_email;
+
     public $type_trips = 'mayantrains';
+
     public $category_id;
+
     public $editId;
 
     public function updatingSearch()
@@ -33,7 +41,7 @@ class MayanTrain extends Component
 
     public function render()
     {
-        $mayantrains = Trip::where('name', 'like', '%' . $this->search . '%')->where('type_trips', 'mayantrains')->paginate(8);
+        $mayantrains = Trip::where('name', 'like', '%'.$this->search.'%')->where('type_trips', 'mayantrains')->paginate(8);
         $categories = Category::where('key', 'mayantrains')->get();
 
         return view('livewire.mayan-train', compact('mayantrains', 'categories'))->layout('layouts.admin');
@@ -43,7 +51,7 @@ class MayanTrain extends Component
     {
         $validatedData = $this->validate([
             'name' => 'required|string',
-            'slug' => 'required|string|unique:trips,slug' . ($this->editId ? ',' . $this->editId : ''),
+            'slug' => 'required|string|unique:trips,slug'.($this->editId ? ','.$this->editId : ''),
             'day' => 'required|integer',
             'outstanding' => 'nullable|boolean',
             'first_email' => 'required',

@@ -8,13 +8,14 @@ use Livewire\WithPagination;
 
 class SaleDelivery extends Component
 {
-
     use WithPagination;
 
-
     public $search;
+
     public $datestart;
+
     public $dateend;
+
     public $type_trips;
 
     public function mount()
@@ -22,24 +23,21 @@ class SaleDelivery extends Component
         $this->datestart = date('Y-m-01');
         $this->dateend = date('Y-m-d');
 
-        $this->type_trips = "";
+        $this->type_trips = '';
     }
 
     public function render()
     {
         $saledeliveriesQuery = ModelsSaleDelivery::query();
 
-
-
-        if ($this->type_trips !== "") {
+        if ($this->type_trips !== '') {
             $saledeliveriesQuery->where('type_trips', $this->type_trips);
-        } else if ($this->type_trips) {
+        } elseif ($this->type_trips) {
             $saledeliveriesQuery->where('type_trips', $this->type_trips);
         }
 
-
         if ($this->search) {
-            $saledeliveriesQuery->where('uuid', 'like', '%' . $this->search . '%');
+            $saledeliveriesQuery->where('uuid', 'like', '%'.$this->search.'%');
         }
 
         if ($this->datestart) {
@@ -58,7 +56,6 @@ class SaleDelivery extends Component
             $total += $saledelivery->total;
             $total_real += $saledelivery->total_real;
         }
-
 
         return view('livewire.sale-delivery', compact('saledeliveries', 'total', 'total_real'));
     }

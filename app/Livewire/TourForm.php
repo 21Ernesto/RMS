@@ -7,8 +7,11 @@ use Livewire\Component;
 class TourForm extends Component
 {
     public $trip;
+
     public $quantity;
+
     public $total = 0;
+
     public $total_real = 0;
 
     public function mount($trip)
@@ -27,7 +30,7 @@ class TourForm extends Component
 
     public function calculateTotal()
     {
-        if (!empty($this->quantity) && $this->quantity > 0) {
+        if (! empty($this->quantity) && $this->quantity > 0) {
             $this->total = $this->quantity * $this->trip['price'];
             $this->total_real = $this->quantity * $this->trip['price_real'];
         } else {
@@ -35,7 +38,6 @@ class TourForm extends Component
             $this->total_real = 0;
         }
     }
-
 
     public function render()
     {

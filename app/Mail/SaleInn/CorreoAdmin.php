@@ -23,9 +23,9 @@ class CorreoAdmin extends Mailable
     {
         try {
             return $this->view('public.email.SaleInn.notificacion_admin')->with('payment', $this->payment);
-    
+
         } catch (\Exception $e) {
-            Log::error('Error al construir el correo electrónico: ' . $e->getMessage());
+            Log::error('Error al construir el correo electrónico: '.$e->getMessage());
         }
     }
 }

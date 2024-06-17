@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Menu;
-use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class MenuManager extends Component
@@ -12,13 +12,17 @@ class MenuManager extends Component
     use WithPagination;
 
     public $name;
+
     public $slug;
-    public $status = false; // Iniciar como falso por defecto
+
+    public $status = false;
+
     public $editMenuId;
 
     public function render()
     {
         $menus = Menu::paginate(8);
+
         return view('livewire.menu-manager', compact('menus'))->layout('layouts.admin');
     }
 
@@ -26,7 +30,7 @@ class MenuManager extends Component
     {
         $this->validate([
             'name' => 'required|string',
-            'slug' => 'required|string|unique:menus,slug' . ($this->editMenuId ? ',' . $this->editMenuId : ''),
+            'slug' => 'required|string|unique:menus,slug'.($this->editMenuId ? ','.$this->editMenuId : ''),
             'status' => 'nullable|boolean',
         ]);
 

@@ -4,30 +4,38 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Trip;
-use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Tour extends Component
 {
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
-   
-    
+
     public $day;
+
     public $outstanding = false;
+
     public $first_email;
+
     public $second_email;
+
     public $price;
+
     public $price_real;
+
     public $type_trips = 'tour';
+
     public $category_id;
+
     public $editId;
 
     public function updatingSearch()
@@ -37,7 +45,7 @@ class Tour extends Component
 
     public function render()
     {
-        $tours = Trip::where('name', 'like', '%' . $this->search . '%')->where('type_trips', 'tour')->paginate(8);
+        $tours = Trip::where('name', 'like', '%'.$this->search.'%')->where('type_trips', 'tour')->paginate(8);
         $categories = Category::where('key', 'tour')->get();
 
         return view('livewire.tour', compact('tours', 'categories'))->layout('layouts.admin');
@@ -47,10 +55,9 @@ class Tour extends Component
     {
         $rules = [
             'name' => 'required|string',
-            'slug' => 'required|string|unique:trips,slug' . ($this->editId ? ',' . $this->editId : ''),
+            'slug' => 'required|string|unique:trips,slug'.($this->editId ? ','.$this->editId : ''),
             'day' => 'required|integer',
-            
-            
+
             'outstanding' => 'nullable|boolean',
             'first_email' => 'required',
             'second_email' => 'required',
@@ -61,10 +68,6 @@ class Tour extends Component
         ];
 
         $validatedData = $this->validate($rules);
-
-        
-
-        
 
         if ($this->editId) {
             $tour = Trip::find($this->editId);
@@ -88,8 +91,7 @@ class Tour extends Component
         $tour = Trip::findOrFail($id);
         $this->name = $tour->name;
         $this->slug = $tour->slug;
-        
-        
+
         $this->day = $tour->day;
         $this->outstanding = (bool) $tour->outstanding;
         $this->first_email = $tour->first_email;
@@ -135,8 +137,7 @@ class Tour extends Component
     {
         $this->name = '';
         $this->slug = '';
-        
-        
+
         $this->day = '';
         $this->outstanding = false;
         $this->first_email = '';
@@ -146,8 +147,4 @@ class Tour extends Component
         $this->category_id = '';
         $this->editId = null;
     }
-
-    
-
-    
 }

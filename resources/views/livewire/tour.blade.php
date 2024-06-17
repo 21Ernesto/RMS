@@ -181,7 +181,7 @@
                                         class="text-indigo-600 hover:text-indigo-900 mr-2">
                                         <i class="fas fa-edit text-xl"></i>
                                     </button>
-                                    <button wire:click="delete({{ $tour->id }})"
+                                    <button onclick="tours({{ $tour->id }})"
                                         title="Eliminar {{ $tour->name }}"
                                         class="mr-3 text-red-600 hover:text-red-900">
                                         <i class="fas fa-trash-alt text-xl"></i>
@@ -208,6 +208,29 @@
 
     </div>
     @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function tours(id) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.call('delete', id);
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Ha sido eliminado.',
+                            'success'
+                        )
+                    }
+                })
+            }
+        </script>
         <script>
             document.getElementById("name").addEventListener('keyup', slugChange);
 

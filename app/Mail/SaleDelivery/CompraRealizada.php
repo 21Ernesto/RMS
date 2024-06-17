@@ -25,7 +25,7 @@ class CompraRealizada extends Mailable
             return $this->view('public.email.SaleDelivery.compra_realizada')->with('payment', $this->payment);
 
         } catch (\Exception $e) {
-            Log::error('Error al construir el correo electrónico: ' . $e->getMessage());
+            Log::error('Error al construir el correo electrónico: '.$e->getMessage());
         }
     }
 }

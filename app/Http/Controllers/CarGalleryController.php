@@ -11,6 +11,7 @@ class CarGalleryController extends Controller
     public function index()
     {
         $carGalleries = CarGallery::all();
+
         return view('admin.cars.index', compact('carGalleries'));
     }
 
@@ -26,9 +27,9 @@ class CarGalleryController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imageName = 'car_' . time() . '.' . $request->image->extension();
+            $imageName = 'car_'.time().'.'.$request->image->extension();
             $request->file('image')->move(public_path('images/car_galleries'), $imageName);
-            $validatedData['image'] = 'images/car_galleries/' . $imageName;
+            $validatedData['image'] = 'images/car_galleries/'.$imageName;
         }
 
         CarGallery::create($validatedData);
@@ -39,6 +40,7 @@ class CarGalleryController extends Controller
     public function edit($id)
     {
         $carGallery = CarGallery::findOrFail($id);
+
         return view('admin.cars.edit', compact('carGallery'));
     }
 
@@ -55,9 +57,9 @@ class CarGalleryController extends Controller
                 File::delete(public_path($carGallery->image));
             }
 
-            $imageName = 'car_' . time() . '.' . $request->image->extension();
+            $imageName = 'car_'.time().'.'.$request->image->extension();
             $request->file('image')->move(public_path('images/car_galleries'), $imageName);
-            $validatedData['image'] = 'images/car_galleries/' . $imageName;
+            $validatedData['image'] = 'images/car_galleries/'.$imageName;
         }
 
         $carGallery->update($validatedData);

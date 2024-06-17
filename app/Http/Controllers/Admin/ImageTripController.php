@@ -27,18 +27,18 @@ class ImageTripController extends Controller
             if (File::exists(public_path($trip->front_page))) {
                 File::delete(public_path($trip->front_page));
             }
-            $front_pageName = 'trip_' . time() . '.' . $request->front_page->extension();
+            $front_pageName = 'trip_'.time().'.'.$request->front_page->extension();
             $request->file('front_page')->move(public_path('images/front_pages'), $front_pageName);
-            $validatedData['front_page'] = 'images/front_pages/' . $front_pageName;
+            $validatedData['front_page'] = 'images/front_pages/'.$front_pageName;
         }
 
         if ($request->hasFile('banner')) {
             if (File::exists(public_path($trip->banner))) {
                 File::delete(public_path($trip->banner));
             }
-            $bannerName = 'trip_' . time() . '.' . $request->banner->extension();
+            $bannerName = 'trip_'.time().'.'.$request->banner->extension();
             $request->file('banner')->move(public_path('images/banners'), $bannerName);
-            $validatedData['banner'] = 'images/banners/' . $bannerName;
+            $validatedData['banner'] = 'images/banners/'.$bannerName;
         }
 
         $trip->update($validatedData);

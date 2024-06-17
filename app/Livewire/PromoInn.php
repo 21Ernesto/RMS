@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 
 class PromoInn extends Component
 {
-
     use WithPagination;
 
     public $search;
@@ -16,21 +15,30 @@ class PromoInn extends Component
     public $trip;
 
     public $hotel_name;
+
     public $duration_days_nights;
+
     public $city;
+
     public $adult_price_client;
+
     public $child_price_client;
+
     public $adult_price_provider;
+
     public $child_price_provider;
+
     public $stars;
+
     public $trip_id;
+
     public $editId;
 
     public function render()
     {
         $this->trip_id = $this->trip->id;
 
-        $promoInns = ModelsPromoInn::where('hotel_name', 'like', '%' . $this->search . '%')->where('trip_id', $this->trip->id)->paginate(8);
+        $promoInns = ModelsPromoInn::where('hotel_name', 'like', '%'.$this->search.'%')->where('trip_id', $this->trip->id)->paginate(8);
 
         return view('livewire.promo-inn', compact('promoInns'));
     }

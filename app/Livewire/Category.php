@@ -4,23 +4,26 @@ namespace App\Livewire;
 
 use App\Models\Category as CategoryModel;
 use App\Models\Menu;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Category extends Component
 {
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
 
     public $name;
+
     public $slug;
+
     public $key;
+
     public $menu_id;
+
     public $editId;
 
     protected $messages = [
@@ -35,7 +38,8 @@ class Category extends Component
     public function render()
     {
         $menus = Menu::where('status', 1)->get();
-        $categories = CategoryModel::where('name', 'like', '%' . $this->search . '%')->paginate(8);
+        $categories = CategoryModel::where('name', 'like', '%'.$this->search.'%')->paginate(8);
+
         return view('livewire.category', compact('categories', 'menus'))->layout('layouts.admin');
     }
 
@@ -43,7 +47,7 @@ class Category extends Component
     {
         $rules = [
             'name' => 'required|string',
-            'slug' => 'required|string|unique:categories,slug' . ($this->editId ? ',' . $this->editId : ''),
+            'slug' => 'required|string|unique:categories,slug'.($this->editId ? ','.$this->editId : ''),
             'key' => 'required|string|max:255',
             'menu_id' => 'required|exists:menus,id',
         ];

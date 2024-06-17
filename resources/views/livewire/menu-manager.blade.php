@@ -65,26 +65,23 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <div wire:transition>
-                        @foreach ($menus as $menu)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $menu->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $menu->status ? 'Activo' : 'Inactivo' }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
-                                    <button wire:click="edit({{ $menu->id }})" @click="open = true"
-                                        title="Editar {{ $menu->name }}"
-                                        class="text-indigo-600 hover:text-indigo-900 mr-2">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button wire:click="delete({{ $menu->id }})"
-                                        title="Eliminar {{ $menu->name }}"
-                                        class="text-red-600 hover:text-red-900 mr-4">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </div>
+                    @foreach ($menus as $menu)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $menu->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $menu->status ? 'Activo' : 'Inactivo' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
+                                <button wire:click="edit({{ $menu->id }})" @click="open = true"
+                                    title="Editar {{ $menu->name }}"
+                                    class="text-indigo-600 hover:text-indigo-900 mr-2">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" onclick="confirmDeletion({{ $menu->id }})"
+                                    title="Eliminar {{ $menu->name }}" class="text-red-600 hover:text-red-900 mr-4">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
@@ -95,6 +92,30 @@
     </div>
 
     @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function confirmDeletion(id) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.call('delete', id);
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El menú ha sido eliminado.',
+                            'success'
+                        )
+                    }
+                })
+            }
+        </script>
+
         <script>
             document.getElementById("name").addEventListener('keyup', slugChange);
 

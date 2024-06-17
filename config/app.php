@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Rutas Mayas del Suroeste'),
+    'name' => env('APP_NAME', 'Rutas Mayas del Sureste'),
 
     /*
     |--------------------------------------------------------------------------

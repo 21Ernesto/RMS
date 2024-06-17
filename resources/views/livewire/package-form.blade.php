@@ -42,89 +42,78 @@
 
         <div class="mt-3 form-group">
             <label for="hotel" class="fw-bold">Hotel: *</label>
-            <select required class="form-control" id="hotel" name="hotel" wire:model.live="selectedHotel"
-                wire:change="calculateTotal" style="font-size: 13px;">
+            <select required class="form-control" id="hotel" name="hotel" wire:model.live="selectedHotel" wire:change="calculateTotal" style="font-size: 13px;">
                 <option style="font-size: 13px;" value="">Seleccione un hotel</option>
                 @foreach ($hotels as $hotel)
-                    <option style="font-size: 13px;" value="{{ $hotel->id }}">{{ $hotel->hotel_name }} -
-                        {{ $hotel->city }} - {{ $hotel->stars }} 🌟</option>
+                    <option style="font-size: 13px;" value="{{ $hotel->id }}">{{ $hotel->hotel_name }} - {{ $hotel->city }} - {{ $hotel->stars }} 🌟</option>
                 @endforeach
             </select>
         </div>
-
+        
         @if ($selectedHotel)
             <div class="mt-3 form-group">
                 <div class="row">
                     <h6>Habitaciones</h6>
                     <div class="row">
-                        @if ($trip->type_trips == 'mayantrains')
-                        @else
+                        @if ($show_simple)
                             <div class="col-lg-6">
                                 <label for="quantity_simple" style="font-size: 15px; font-weight: 900;">Sencilla:</label>
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                        wire:click="decrease('quantity_simple')">-</button>
-                                    <input type="number" class="form-control" id="quantity_simple" name="quantity_simple"
-                                        wire:model="quantity_simple" min="0" readonly>
-                                    <button type="button" class="btn btn-outline-secondary"
-                                        wire:click="increase('quantity_simple')">+</button>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="decrease('quantity_simple')">-</button>
+                                    <input type="number" class="form-control" id="quantity_simple" name="quantity_simple" wire:model="quantity_simple" min="0" readonly>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="increase('quantity_simple')">+</button>
                                 </div>
                             </div>
                         @endif
-
-
-                        <div class="col-lg-6">
-                            <label for="quantity_double" style="font-size: 15px; font-weight: 900;">Doble:</label>
-                            <div class="input-group">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="decrease('quantity_double')">-</button>
-                                <input type="number" class="form-control" id="quantity_double" name="quantity_double"
-                                    wire:model="quantity_double" min="0" readonly>
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="increase('quantity_double')">+</button>
+        
+                        @if ($show_double)
+                            <div class="col-lg-6">
+                                <label for="quantity_double" style="font-size: 15px; font-weight: 900;">Doble:</label>
+                                <div class="input-group">
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="decrease('quantity_double')">-</button>
+                                    <input type="number" class="form-control" id="quantity_double" name="quantity_double" wire:model="quantity_double" min="0" readonly>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="increase('quantity_double')">+</button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <label for="quantity_triple" style="font-size: 15px; font-weight: 900;">quantity_triple:</label>
-                            <div class="input-group">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="decrease('quantity_triple')">-</button>
-                                <input type="number" class="form-control" id="quantity_triple" name="quantity_triple"
-                                    wire:model="quantity_triple" min="0" readonly>
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="increase('quantity_triple')">+</button>
+                        @endif
+        
+                        @if ($show_triple)
+                            <div class="col-lg-6">
+                                <label for="quantity_triple" style="font-size: 15px; font-weight: 900;">Triple:</label>
+                                <div class="input-group">
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="decrease('quantity_triple')">-</button>
+                                    <input type="number" class="form-control" id="quantity_triple" name="quantity_triple" wire:model="quantity_triple" min="0" readonly>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="increase('quantity_triple')">+</button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <label for="quantity_quadruple" style="font-size: 15px; font-weight: 900;">Cuádruple:</label>
-                            <div class="input-group">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="decrease('quantity_quadruple')">-</button>
-                                <input type="number" class="form-control" id="quantity_quadruple" name="quantity_quadruple"
-                                    wire:model="quantity_quadruple" min="0" readonly>
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="increase('quantity_quadruple')">+</button>
+                        @endif
+        
+                        @if ($show_quadruple)
+                            <div class="col-lg-6">
+                                <label for="quantity_quadruple" style="font-size: 15px; font-weight: 900;">Cuádruple:</label>
+                                <div class="input-group">
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="decrease('quantity_quadruple')">-</button>
+                                    <input type="number" class="form-control" id="quantity_quadruple" name="quantity_quadruple" wire:model="quantity_quadruple" min="0" readonly>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="increase('quantity_quadruple')">+</button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <label for="quantity_children_under_10" style="font-size: 15px; font-weight: 900;">Niños menores a
-                                10 años:</label>
-                            <div class="input-group">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="decrease('quantity_children_under_10')">-</button>
-                                <input type="number" class="form-control" id="quantity_children_under_10"
-                                    name="quantity_children_under_10" wire:model="quantity_children_under_10" min="0" readonly>
-                                <button type="button" class="btn btn-outline-secondary"
-                                    wire:click="increase('quantity_children_under_10')">+</button>
+                        @endif
+        
+                        @if ($show_children_under_10)
+                            <div class="col-lg-12">
+                                <label for="quantity_children_under_10" style="font-size: 15px; font-weight: 900;">Niños menores a 10 años:</label>
+                                <div class="input-group">
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="decrease('quantity_children_under_10')">-</button>
+                                    <input type="number" class="form-control" id="quantity_children_under_10" name="quantity_children_under_10" wire:model="quantity_children_under_10" min="0" readonly>
+                                    <button type="button" class="btn btn-outline-secondary" wire:click="increase('quantity_children_under_10')">+</button>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         @endif
+        
 
         <button type="submit" class="mt-4 btn btn-success">
             <i class="fa fa-money"></i> Comprar

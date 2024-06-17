@@ -41,7 +41,7 @@
                         class="text-indigo-600 hover:text-indigo-900 mr-2">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button wire:click="delete({{ $message->id }})" title="Eliminar {{ $message->name }}"
+                    <button onclick="messages({{ $message->id }})" title="Eliminar {{ $message->name }}"
                         class="text-red-600 hover:text-red-900 mr-4">
                         <i class="fas fa-trash-alt"></i>
                     </button>
@@ -50,3 +50,26 @@
         </div>
     </article>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function messages(id) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.call('delete', id);
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Ha sido eliminado.',
+                            'success'
+                        )
+                    }
+                })
+            }
+        </script>

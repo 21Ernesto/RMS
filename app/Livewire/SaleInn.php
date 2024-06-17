@@ -8,13 +8,14 @@ use Livewire\WithPagination;
 
 class SaleInn extends Component
 {
-
     use WithPagination;
 
-    
     public $search;
+
     public $datestart;
+
     public $dateend;
+
     public $type_trips;
 
     public function mount()
@@ -22,24 +23,21 @@ class SaleInn extends Component
         $this->datestart = date('Y-m-01');
         $this->dateend = date('Y-m-d');
 
-        $this->type_trips = "";
+        $this->type_trips = '';
     }
 
     public function render()
     {
         $saleinnsQuery = ModelsSaleInn::query();
 
-        
-
-        if ($this->type_trips !== "") {
+        if ($this->type_trips !== '') {
             $saleinnsQuery->where('type_trips', $this->type_trips);
-        } else if ($this->type_trips) {
+        } elseif ($this->type_trips) {
             $saleinnsQuery->where('type_trips', $this->type_trips);
         }
 
-
         if ($this->search) {
-            $saleinnsQuery->where('uuid', 'like', '%' . $this->search . '%');
+            $saleinnsQuery->where('uuid', 'like', '%'.$this->search.'%');
         }
 
         if ($this->datestart) {
@@ -58,7 +56,6 @@ class SaleInn extends Component
             $total += $saleinn->quantity * $saleinn->price; //Ganancias
             $total_real += $saleinn->quantity * $saleinn->price_real; //Diferencial
         }
-
 
         return view('livewire.sale-inn', compact('saleinns', 'total', 'total_real'));
     }

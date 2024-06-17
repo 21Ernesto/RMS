@@ -26,5 +26,4 @@ class SaleInn extends Model
         'total',
         'total_real',
     ];
-
 }

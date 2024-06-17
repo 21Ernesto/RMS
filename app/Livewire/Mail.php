@@ -8,18 +8,20 @@ use Livewire\WithPagination;
 
 class Mail extends Component
 {
-
     use WithPagination;
 
     public $search;
 
     public $name;
+
     public $email;
+
     public $editId;
 
     public function render()
     {
-        $mails = ModelsMail::where('name', 'like', '%' . $this->search . '%')->where('email', 'like', '%' . $this->search . '%')->paginate(8);
+        $mails = ModelsMail::where('name', 'like', '%'.$this->search.'%')->where('email', 'like', '%'.$this->search.'%')->paginate(8);
+
         return view('livewire.mail', compact('mails'))->layout('layouts.admin');
     }
 
@@ -27,7 +29,7 @@ class Mail extends Component
     {
         $this->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:mails,email,' . $this->editId,
+            'email' => 'required|string|email|max:255|unique:mails,email,'.$this->editId,
         ]);
 
         if ($this->editId) {

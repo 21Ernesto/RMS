@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('trip_name');
             $table->string('hotel_name');
-            
+
             $table->integer('quantity_simple')->nullable();
             $table->integer('quantity_double')->nullable();
             $table->integer('quantity_triple')->nullable();
@@ -35,16 +35,16 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('payment_status');
 
-            $table->decimal('provider_simple', 10,2)->nullable();
-            $table->decimal('provider_double', 10,2)->nullable();
-            $table->decimal('provider_triple', 10,2)->nullable();
-            $table->decimal('provider_quadruple', 10,2)->nullable();
-            $table->decimal('provider_children_under_10', 10,2)->nullable();
-            $table->decimal('client_simple', 10,2)->nullable();
-            $table->decimal('client_double', 10,2)->nullable();
-            $table->decimal('client_triple', 10,2)->nullable();
-            $table->decimal('client_quadruple', 10,2)->nullable();
-            $table->decimal('client_children_under_10', 10,2)->nullable();
+            $table->decimal('provider_simple', 10, 2)->nullable();
+            $table->decimal('provider_double', 10, 2)->nullable();
+            $table->decimal('provider_triple', 10, 2)->nullable();
+            $table->decimal('provider_quadruple', 10, 2)->nullable();
+            $table->decimal('provider_children_under_10', 10, 2)->nullable();
+            $table->decimal('client_simple', 10, 2)->nullable();
+            $table->decimal('client_double', 10, 2)->nullable();
+            $table->decimal('client_triple', 10, 2)->nullable();
+            $table->decimal('client_quadruple', 10, 2)->nullable();
+            $table->decimal('client_children_under_10', 10, 2)->nullable();
 
             $table->double('total');
             $table->double('total_real');

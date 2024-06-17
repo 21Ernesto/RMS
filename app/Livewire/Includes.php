@@ -8,20 +8,25 @@ use Livewire\WithPagination;
 
 class Includes extends Component
 {
-
     use WithPagination;
 
     public $search;
+
     public $trip;
+
     public $include;
+
     public $description = '';
+
     public $trip_id;
+
     public $editId;
 
     public function render()
     {
         $this->trip_id = $this->trip->id;
         $includes = ModelsIncludes::where('trip_id', $this->trip->id)->get();
+
         return view('livewire.includes', compact('includes'));
     }
 
@@ -50,7 +55,6 @@ class Includes extends Component
         $include = ModelsIncludes::findOrFail($id);
         $this->description = $include->description;
     }
-
 
     public function cancelEdit()
     {

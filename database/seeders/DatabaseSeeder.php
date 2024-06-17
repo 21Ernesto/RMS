@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-
         // Menu::factory()->count(6)->create();
         // Category::factory()->count(6)->create();
         // Trip::factory()->count(100)->create();

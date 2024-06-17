@@ -8,19 +8,22 @@ use Livewire\WithPagination;
 
 class User extends Component
 {
-
     use WithPagination;
 
     public $search;
 
     public $name;
+
     public $email;
+
     public $password;
+
     public $editId;
 
     public function render()
     {
-        $users = ModelsUser::where('name', 'like', '%' . $this->search . '%')->where('email', 'like', '%' . $this->search . '%')->paginate(8);
+        $users = ModelsUser::where('name', 'like', '%'.$this->search.'%')->where('email', 'like', '%'.$this->search.'%')->paginate(8);
+
         return view('livewire.user', compact('users'))->layout('layouts.admin');
     }
 
@@ -28,7 +31,7 @@ class User extends Component
     {
         $this->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $this->editId,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$this->editId,
             'password' => 'sometimes|nullable|string|min:8',
         ]);
 
@@ -75,5 +78,4 @@ class User extends Component
     {
         $this->resetForm();
     }
-
 }

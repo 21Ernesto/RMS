@@ -11,7 +11,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $menus = Menu::where('status', 1)->get();;
+        $menus = Menu::where('status', 1)->get();
 
         return view('public.contacto', compact('menus'));
     }

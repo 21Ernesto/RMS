@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('uuid')->nullable();
             $table->string('payment_id');
-            
+
             $table->string('trip_name');
             $table->string('quantity');
             $table->string('price')->nullable();
             $table->string('price_real')->nullable();
             $table->date('datestart');
-            
+
             $table->string('type_trips');
 
             $table->string('currency');

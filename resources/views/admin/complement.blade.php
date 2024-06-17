@@ -38,6 +38,4 @@
     <div class="mt-7">
         @livewire('food-component', ['trip' => $trip], key('food-component' . $trip->id))
     </div>
-
-
 </x-admin-layout>

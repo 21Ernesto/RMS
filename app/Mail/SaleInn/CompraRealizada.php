@@ -2,7 +2,6 @@
 
 namespace App\Mail\SaleInn;
 
-use App\Models\payment;
 use App\Models\SaleInn;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -26,7 +25,7 @@ class CompraRealizada extends Mailable
             return $this->view('public.email.SaleInn.compra_realizada')->with('payment', $this->payment);
 
         } catch (\Exception $e) {
-            Log::error('Error al construir el correo electrónico: ' . $e->getMessage());
+            Log::error('Error al construir el correo electrónico: '.$e->getMessage());
         }
     }
 }
