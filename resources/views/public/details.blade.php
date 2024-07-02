@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
                         <div class="page-heading">
-                            <h3 class="page-title">{!! $trip->name !!}</h3>
+                            {{-- <h3 class="page-title">{!! $trip->name !!}</h3> --}}
                         </div>
                     </div>
                 </div>
