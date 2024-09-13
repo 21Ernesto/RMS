@@ -43,6 +43,6 @@ class FormularioContacto extends Mailable
     {
         return $this->view('public.email.formulario')
             ->subject('Nuevo formulario de contacto')
-            ->to('zading2023@gmail.com');
+            ->to('notificaciones@rutasmayasdelsureste.com');
     }
 }

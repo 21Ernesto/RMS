@@ -29,4 +29,10 @@ class InicioController extends Controller
 
         return view('public.aviso_de_privacidad', compact('menus'));
     }
+    public function terminos()
+    {
+        $menus = Menu::where('status', 1)->get();
+
+        return view('public.terminos_condiciones', compact('menus'));
+    }
 }

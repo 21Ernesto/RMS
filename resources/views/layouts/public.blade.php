@@ -22,7 +22,6 @@
         rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
@@ -34,11 +33,34 @@
 
     <style>
         .active {
-            /* background-color: #f0f0f0; */
             color: #333;
         }
-    </style>
 
+        /* Estilos personalizados para los iconos flotantes */
+        .floating-icons {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .floating-icons a {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background-color: #25d366; /* Color de fondo de WhatsApp */
+            transition: background-color 0.3s;
+        }
+
+        .floating-icons a:hover {
+            background-color: #128c7e; /* Color de fondo de WhatsApp al pasar el mouse */
+        }
+    </style>
 </head>
 
 <body class="select-none user-select-none">
@@ -61,6 +83,21 @@
         </div>
     </div>
 
+    <!-- WhatsApp Icons -->
+    <div class="floating-icons">
+        <a href="https://wa.me/529163412188?text=Hola%20necesito%20m%C3%A1s%20informaci%C3%B3n%20de%20rutas%20mayas" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Google Translate -->
+    <div id="google_translate_element" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

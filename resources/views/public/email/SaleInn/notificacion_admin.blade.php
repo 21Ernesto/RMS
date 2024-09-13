@@ -39,7 +39,7 @@
                         <td align="center" bgcolor="#ffffff">
                             <h2 style="color: #1a202c; font-size: 18px;">Detalles de la compra</h2>
                             <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li><strong>Producto adquirido:</strong> {{ $payment->set }}</li>
+                                <li><strong>Producto adquirido:</strong> {{ $payment->trip_name }}</li>
                                 <li><strong>Fecha de entrada:</strong> {{ $payment->datestart }}</li>
                                 <li><strong>Cantidad:</strong> {{ $payment->quantity }}</li>
                                 <li><strong>Total:</strong> $ {{ $payment->total }} MXN</li>

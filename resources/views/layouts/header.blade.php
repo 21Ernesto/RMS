@@ -80,7 +80,7 @@
                                 Chiapas.</span>
                             <span><a href="mailto:rutasdelsureste@live.com.mx"><i
                                         class="fa-solid fa-envelope"></i>rutasdelsureste@live.com.mx</a> </span>
-                            <span><a href="tel:+52916 129 1321"><i class="fa-solid fa-phone"></i>916 129 1321</a></span>
+                            <span><a href="tel:+52916 129 1321"><i class="fa-solid fa-phone"></i>9163412188</a></span>
                         </div>
                         <div class="social-profile">
                             <a href="https://www.facebook.com/profile.php?id=100063763680077"><i

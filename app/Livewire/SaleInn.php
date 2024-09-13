@@ -10,6 +10,8 @@ class SaleInn extends Component
 {
     use WithPagination;
 
+    public $selectedSaleInn = null;
+
     public $search;
 
     public $datestart;
@@ -17,6 +19,17 @@ class SaleInn extends Component
     public $dateend;
 
     public $type_trips;
+
+    public function selectSaleInn($id)
+    {
+        $this->selectedSaleInn = ModelsSaleInn::findOrFail($id);
+    }
+
+    public function closeModal()
+{
+    $this->selectedSaleInn = null;
+}
+
 
     public function mount()
     {

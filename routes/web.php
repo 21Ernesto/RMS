@@ -88,6 +88,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/comprafinalizada', [InicioController::class, 'exits'])->name('comprafinalizada');
 Route::get('/aviso_de_privacidad', [InicioController::class, 'privacy'])->name('privacidad');
+Route::get('/terminos_y_condiciones', [InicioController::class, 'terminos'])->name('terminos');
 Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');
 Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
 
